@@ -13,7 +13,7 @@
         }
         public function index(){
 
-            $products= $this->productModel->getAll(['id', 'name']);
+            $products= $this->productModel->getAll(['id', 'name'], 1);
 
             return $this->view('frontend.products.index', [
                 'pageTitle' => 'Trang danh sach san pham',
@@ -21,11 +21,40 @@
             ]);
         }
 
+        public function store(){
+            $data= [
+                'id' => '16',
+                'name' => 'Iphone 16',
+                'price' => '60000000',
+                'image' => '',
+                'category_id' => '16',
+            ];
+
+            $this->productModel->store($data);
+        }
+
+        public function update(){
+            $id= $_GET['id'];
+            $data= [
+                'id' => '11',
+                'name' => 'Iphone 16',
+                'price' => '60000000',
+                'image' => '',
+                'category_id' => '16',
+            ];
+
+            $this->productModel->update($data, $id);
+        }
+        
         public function show(){
             $product= $this->productModel->findById(1);
             return $this->view('frontend.products.show', [
                 'product' => $product,
             ]);
+        }
+        public function delete(){
+            $id= $_GET['id'];
+            $this->productModel->delete($id);
         }
     }
 
